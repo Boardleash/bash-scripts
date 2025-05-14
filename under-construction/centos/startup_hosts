@@ -5,6 +5,8 @@
 # DATE: Wednesday, April 2 2025
 
 # Power on VM servers (if they are offline)
+# This works with virsh, so VMs only.
+# Replace text within "<>" with appropriate information.
 
 # Debug
 #set -x
@@ -20,7 +22,7 @@ logfile=/usr/local/bin/script.log
 starthost=$1
 
 # Variable to store the array of hosts
-hfile=("avalanche" "freighter" "jellyfish" "pelagia" "sandbar" "stingray" "summit")
+hfile=("<YOUR HOST HERE>" "<YOUR HOST HERE>" "<YOUR HOST HERE>")
 
 # This script requires escalated privileges, so let's check if the user is elevated.
 printf "\n$(date "+%c"): Starting startup_hosts script" | tee -a "$logfile"

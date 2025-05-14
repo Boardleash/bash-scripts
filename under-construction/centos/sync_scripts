@@ -5,7 +5,9 @@
 # DATE: Friday, March 28 2025
 
 # Check if hosts are online, and, if so, rsync the /usr/local/bin/ scripts to the hosts
-# As of 28MAR2025, this script will only work with the 'sysadmin' user
+# As of 28MAR2025, this script will only work with the '<MY SPECIFIC USER>'.
+# This is only local to my machine; make changes as necessary for your system.
+# Replace text within "<>" with appropriate information.
 
 # Debug
 # set -x
@@ -21,7 +23,7 @@ logfile=/usr/local/bin/script.log
 thehost=$1
 
 # Variable to store array of hosts
-hfile=("avalanche" "freighter" "pelagia" "sandbar" "stingray" "summit")
+hfile=("<YOUR HOST HERE>" "<YOUR HOST HERE>" "<YOUR HOST HERE>")
 
 ################
 # THE SCRIPT
@@ -29,7 +31,7 @@ hfile=("avalanche" "freighter" "pelagia" "sandbar" "stingray" "summit")
 
 # Verify who the user is that is running this script and stop if it is incorrect user
 printf "\n$(date "+%c"): Starting sync_scripts script" | tee -a "$logfile"
-if [ "$USER" != 'sysadmin' ]; then
+if [ "$USER" != '<MY SPECIFIC USER>' ]; then
   printf "\n$(date "+%c"): INVALID USER: EXITING" | tee -a "$logfile"
   exit 126
 fi

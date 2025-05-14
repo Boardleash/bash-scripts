@@ -5,7 +5,9 @@
 # DATE: Tuesday, March 25 2025
 
 # Check if hosts are online, and, if so, determine their distro and update based on distro
-# As of 25MAR2025, this script will only work with the 'sysadmin' user
+# As of 25MAR2025, this script will only work with the '<MY SPECIFIC USER>'.
+# This is only local to my machine; make changes as necessary for your system.
+# Replace text within "<>" with appropriate information.
 
 # Debug
 #set -x
@@ -18,7 +20,7 @@
 logfile=/usr/local/bin/script.log
 
 # Variable to store the array of hosts
-hfile=("avalanche" "freighter" "pelagia" "sandbar" "stingray" "summit")
+hfile=("<YOUR HOST HERE>" "<YOUR HOST HERE>" "<YOUR HOST HERE>")
 
 # Variable to store the host to update IF only one host is being targeted
 uphost=$1
@@ -29,7 +31,7 @@ uphost=$1
 
 # Verify who the user is that is running this script and stop if it is incorrect user
 printf "\n$(date "+%c"): Starting update_servers script" | tee -a "$logfile"
-if [ "$USER" != 'sysadmin' ]; then
+if [ "$USER" != '<MY SPECIFIC USER>' ]; then
   printf "\n$(date +"%c"): INVALID USER; EXITING" | tee -a "$logfile"
   exit 126
 fi

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # TITLE: edit_sudoers
-# AUTHOR: Boardleahs (Derek)
+# AUTHOR: Boardleash (Derek)
 # DATE: Saturday, March 22 2025
 
 # Script to edit the /etc/sudoers file

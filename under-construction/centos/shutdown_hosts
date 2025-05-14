@@ -5,7 +5,9 @@
 # DATE: Tuesday, March 25 2025
 
 # Check if hosts are online, and, if so, shut them down
-# As of 25MAR2025, this script will only work with the 'sysadmin' user
+# As of 25MAR2025, this script will only work with the '<MY SPECIFIC USER>'.
+# This is an issue local to me; make changes as necessary for your system.
+# Replace text within "<>" with appropriate information.
 
 # Debug
 #set -x
@@ -21,7 +23,7 @@ logfile=/usr/local/bin/script.log
 shuthost=$1
 
 # Variable to store the array of hosts
-hfile=("avalanche" "freighter" "jellyfish" "pelagia" "sandbar" "stingray" "summit")
+hfile=("<YOUR HOST HERE>", "<YOUR HOST HERE>", "<YOUR HOST HERE>")
 
 ###############
 # THE SCRIPT

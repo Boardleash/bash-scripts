@@ -5,13 +5,14 @@
 # DATE: Friday, March 21 2025
 
 # Initiate a user login on mutliple machines after copying over ssh keys
+# Replace text within "<>" with appropriate information.
 
 #################
 # VARIABLES
 ###############
 
 # Variable to store the array of hosts
-hfile=("avalanche" "freighter" "pelagia" "sandbar" "stingray" "summit")
+hfile=("<YOUR HOST HERE>" "<YOUR HOST HERE>" "<YOUR HOST HERE>")
 
 # Variables for coloring/formatting
 bgrn='\033[1;32m'

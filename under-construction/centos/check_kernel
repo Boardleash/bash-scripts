@@ -4,8 +4,10 @@
 # AUTHOR: Boardleash (Derek)
 # DATE: Wednesday, March 19 2025
 
-# Pull kernel information from VM hosts
-# As of 25MAR2025, this script will only work with the 'sysadmin' user.
+# Pull kernel information from hosts on network.
+# As of 25MAR2025, this script will only work with the '<MY SPECIFIC USER>'.
+# This is local to my setup only though, so make necessary changes.
+# Replace text within "<>" with appropriate information.
 
 # Debug
 #set -x
@@ -18,11 +20,11 @@
 logfile=/usr/local/bin/script.log
 
 # Variable to store the array of hosts
-hfile=("avalanche" "freighter" "pelagia" "sandbar" "stingray" "summit")
+hfile=("<YOUR HOST HERE>", "<YOUR HOST HERE>", "<YOUR HOST HERE>")
 
 # Verify who the user is that is running this script and stop if it is incorrect user
 printf "\n$(date "+%c"): Starting check_kernel script" | tee -a "$logfile"
-if [ "$USER" != 'sysadmin' ]; then
+if [ "$USER" != '<MY SPECIFIC USER HERE>' ]; then
   printf "\n$(date "+%c"): INVALID USER: EXITING" | tee -a "$logfile"
   exit 126
 fi

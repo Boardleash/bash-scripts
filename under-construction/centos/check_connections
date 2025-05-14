@@ -4,7 +4,8 @@
 # AUTHOR: Boardleash (Derek)
 # DATE: Wednesday, March 19 2025
 
-# Check connectivty to VM hosts
+# Check connectivty to hosts on the network.
+# Replace text that is inside of "<>" with appropriate information.
 
 # Debug
 #set -x
@@ -17,7 +18,7 @@
 logfile=/usr/local/bin/script.log
 
 # Variable to store the array of hosts
-hfile=("avalanche" "freighter" "jellyfish" "pelagia" "sandbar" "stingray" "summit")
+hfile=("<YOUR HOST HERE>", "<YOUR HOST HERE>", "<YOUR HOST HERE>")
 
 # For loop with nested if/else statement to ping the above array and notify if online or not
 printf "\n$(date "+%c"): Starting check_connections script" | tee -a "$logfile"
