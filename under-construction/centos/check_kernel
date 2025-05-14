@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# TITLE: check_kernel
+# AUTHOR: Boardleash (Derek)
+# DATE: Wednesday, March 19 2025
+
+# Pull kernel information from VM hosts
+# As of 25MAR2025, this script will only work with the 'sysadmin' user.
+
+# Debug
+#set -x
+
+###############
+# VARIABLES
+#############
+
+# Log file variable
+logfile=/usr/local/bin/script.log
+
+# Variable to store the array of hosts
+hfile=("avalanche" "freighter" "pelagia" "sandbar" "stingray" "summit")
+
+# Verify who the user is that is running this script and stop if it is incorrect user
+printf "\n$(date "+%c"): Starting check_kernel script" | tee -a "$logfile"
+if [ "$USER" != 'sysadmin' ]; then
+  printf "\n$(date "+%c"): INVALID USER: EXITING" | tee -a "$logfile"
+  exit 126
+fi
+
+# For loop with nested if/else statement to use the above array and ssh to the host
+# and pull the kernel information
+for host in "${hfile[@]}"; do
+  chkconn=$(ping -c 2 -O "$host")
+  if [ "$?" == 0 ]; then
+    grabkern=$(ssh "$USER"@"$host" 'uname -r')
+    printf "\n$(date "+%c"): "$host" KERNEL= "$grabkern"" | tee -a "$logfile"
+  else
+    printf "\n$(date "+%c"): "$host" is OFFLINE" | tee -a "$logfile"
+  fi
+done
+printf "\n$(date "+%c"): Completed check_kernel script" | tee -a "$logfile"
+printf "\n\n"
+
+# EOF

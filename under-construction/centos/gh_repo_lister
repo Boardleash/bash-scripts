@@ -1,0 +1,93 @@
+#!/bin/bash
+
+########################################
+### TITLE: gh_repo_lister            ###
+### AUTHOR: Boardleash (Derek)       ###
+### DATE: Thursday, February 20 2025 ###
+########################################
+#
+###################
+### DESCRIPTION ###
+###################
+#
+# I needed a way to get a list of my GitHub repositories.
+# Credit to user 'kenorb' who posted an answer/response to a similar question on Stack Overflow
+# on October 15th, 2025 at 22:56.
+# I wanted to build a script around their contribution to make it user interactive, particularly
+# to edit the user variable.
+# Link to Stack Overflow question and answer: https://stackoverflow.com/questions/8713596/how-to-retrieve-the-list-of-all-github-repositories-of-a-person
+
+# This script has been created using CentOS Stream 9 and tested on CentOS Stream 9 graphical and multiuser targets (GUI and server).
+
+################################
+### FORMATTING AND VARIABLES ###
+################################
+
+# Colors
+
+cyan='\033[1;36m'
+noc='\033[0m'
+
+#####################
+### INTRODUCTIONS ###
+#####################
+
+# Set up an introduction to let user know what this script will do.
+
+intro() {
+	echo; echo -e ""$cyan"Hello!  I can retrieve a list of GitHub repositories for a particular user."
+	echo "This does NOT clone, checkout or pull files or repositories from the user's GitHub!"
+	echo "This only provides a list of available repositories that the GitHub user has created."
+	echo "Private repositories are not listed using this script."
+	echo -e "I'll have to ask for the user, and, at the end, I'll ask if you wish to save the list."$noc""; echo
+}
+
+####################
+### ASK FOR USER ###
+####################
+
+# Ask for the GitHub username.
+
+question_one() {
+	read -p "What is the GitHub username for the repositories you want to get a list of?: " GITUSER
+}
+
+########################
+### ASK TO SAVE LIST ###
+########################
+
+# Ask if the user wants to save the list of repositories for future reference.
+
+question_two() {
+	read -p "Do you want to save this list for future reference? (Yes/No): " ANSWER
+	# If/else statement for if the user DOES or DOES NOT want to save the list into a file.
+	if [ "$ANSWER" == 'Yes' ] || [ "$ANSWER" == 'Y' ] || [ "$ANSWER" == 'yes' ] || [ "$ANSWER" == 'y' ]; then
+		echo; curl -s "https://api.github.com/users/"$GITUSER"/repos?" | grep -o 'git@[^"]*' | tee -a "$HOME"/"$GITUSER"_GitHub_Repos
+		echo; echo "The list of GitHub repositories for "$GITUSER" has been saved in your home directory."; echo
+	elif [ "$ANSWER" == 'No' ] || [ "$ANSWER" == 'N' ] || [ "$ANSWER" == 'no' ] || [ "$ANSWER" == 'n' ]; then
+		echo; curl -s "https://api.github.com/users/"$GITUSER"/repos?" | grep -o 'git@[^"]*'
+		echo; echo "The list of GitHub repositories for "$GITUSER" will NOT be saved for future reference."; echo
+	else
+		echo "That is not an appropriate response.  Please try again."
+		question_two
+	fi
+}
+
+#####################
+### MAIN FUNCTION ###
+#####################
+
+main() {
+	intro
+	question_one
+	question_two
+}
+
+#############################
+### EXECUTE MAIN FUNCTION ###
+#############################
+
+main
+
+# EOF
+

@@ -1,0 +1,63 @@
+#!/bin/bash
+
+# TITLE: sync_scripts
+# AUTHOR: Boardleash (Derek)
+# DATE: Friday, March 28 2025
+
+# Check if hosts are online, and, if so, rsync the /usr/local/bin/ scripts to the hosts
+# As of 28MAR2025, this script will only work with the 'sysadmin' user
+
+# Debug
+# set -x
+
+##############
+# VARIABLES
+############
+
+# Log file variable
+logfile=/usr/local/bin/script.log
+
+# Variable to store a singular host (requires input) or the array of hosts
+thehost=$1
+
+# Variable to store array of hosts
+hfile=("avalanche" "freighter" "pelagia" "sandbar" "stingray" "summit")
+
+################
+# THE SCRIPT
+#############
+
+# Verify who the user is that is running this script and stop if it is incorrect user
+printf "\n$(date "+%c"): Starting sync_scripts script" | tee -a "$logfile"
+if [ "$USER" != 'sysadmin' ]; then
+  printf "\n$(date "+%c"): INVALID USER: EXITING" | tee -a "$logfile"
+  exit 126
+fi
+
+# Check if SPECIFIED host is online, and if so, sync the /usr/local/bin/ scripts to the host
+if [ "$thehost" ]; then
+  if [ "$(ping -c 2 -O "$thehost")" == 0 ]; then
+    printf "\n$(date "+%c"): SYNCING LOCAL SCRIPTS TO "$thehost" NOW" | tee -a "$logfile"
+    rsync -avi --delete --progress /usr/local/bin/ "$USER"@"$thehost":/usr/local/bin/
+  else
+    printf "\n$(date "+%c"): "$thehost" IS NOT ONLINE" | tee -a "$logfile"
+  fi
+fi
+
+# Check if SPECIFIED host is online, and, if so, sync the /usr/local/bin/ scripts to the host
+if [ ! "$thehost" ]; then
+  for host in "${hfile[@]}"; do
+    chkconn=$(ping -c 2 -O "$host")
+    if [ "$?" == 0 ]; then
+      printf "\n$(date "+%c"): SYNCING LOCAL SCRIPTS TO "$host" NOW" | tee -a "$logfile"
+      rsync -avi --delete --progress /usr/local/bin/ "$USER"@"$host":/usr/local/bin/
+    else
+      printf "\n$(date "+%c"): "$host" IS NOT ONLINE" | tee -a "$logfile"
+    fi
+  done
+fi
+printf "\n$(date "+%c"): Completed sync_scripts script" | tee -a "$logfile"
+printf "\n\n"
+
+# EOF
+
