@@ -1,10 +1,10 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 ####################
 ### NETWORK TEST ###
 ####################
 #
-# TITLE: network_test
+# TITLE: network_test.sh
 # AUTHOR: Boardleash (Derek)
 # DATE: Sunday, November 17 2024
 #
@@ -48,7 +48,7 @@
 # This is a simple script to test network connectivity.
 # It will test IPv4 and IPv6 connections (in separate sections).
 # This does NOT require escalated privileges to run.
-# Tested on CentOS Stream 9 VM (GUI and Server).
+# Tested on CentOS Stream 9.
 
 ################################
 ### FORMATTING AND VARIABLES ###

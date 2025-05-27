@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #
-# TITLE: nocnoc
+# TITLE: nocnoc.sh
 # AUTHOR: Boardleash (Derek)
 # DATE: Monday, August 12 2024
 #
@@ -36,7 +36,7 @@
 #..:-=*#%@@@@@@@@@%%%##%%%%%##%@@@@@@@@@@@@@@@###*+==-::
 # A simple script that pulls user information on a machine.
 # It is recommended to run this with escalated privileges (sudo).
-# Tested on CentOS Stream 9 (server and GUI) VM images.
+# Tested on CentOS Stream 9.
 
 # Create some formatting variables.
 brd='\033[3;31m'

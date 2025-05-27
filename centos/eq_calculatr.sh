@@ -1,7 +1,7 @@
-#!/bin/bash
-#
+#!/usr/bin/env bash
+
 #######################################
-### TITLE: eq_calulatr		    ###
+### TITLE: eq_calulatr.sh		        ###
 ### AUTHOR: Boardleash (Derek)      ###
 ### DATE: Saturday, October 12 2024 ###
 #######################################

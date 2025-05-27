@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #
-# TITLE: organizer
+# TITLE: organizer.sh
 # AUTHOR: Boardleash (Derek)
 # DATE: Sunday, August 11 2024
 #
@@ -37,7 +37,7 @@
 #           .........:-#++##*-:++::*##++#-:.
 # A script to help organize files in a user's Desktop, Documents or Downloads directory.
 # This will provide the user with an options of what directory they would like to organize.
-# This has been tested on CentOS Stream 9 Workstation and Server (with GUI) VM images.
+# This has been tested on CentOS Stream 9.
 # Due to some repetitive tasks within this function, comments will be layed out per function.
 # Functions that repeat similar tasks will not have repeat comments (defer to the function that is commented).
 
