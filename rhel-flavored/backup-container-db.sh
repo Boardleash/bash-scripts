@@ -13,8 +13,9 @@
 
 # Check for the containers, via container name, that I use (change based on your requirements)
 hallow=$(podman ps | grep 'halloween_mysql')
-sardines=$(podman ps | grep 'sardine_mysql')
 fitness=$(podman ps | grep 'fitness_maria')
+sardines=$(podman ps | grep 'sardine_mysql')
+seamanship=$(podman ps | grep 'seamanship_db')
 
 # If/else condition to check if either the Halloween, Sardine, or Fitness container is online; if so, create a backup of the applicable SQL 
 # container
@@ -59,19 +60,19 @@ elif [[ "$fitness" ]]; then
   podman restart fitness_maria
   echo "FITNESS MariaDB container has been restarted."
   echo "All done!"
-elif [[ "$study" ]]; then
-  echo "Backing up STUDY database now..."
+elif [[ "$seamanship" ]]; then
+  echo "Backing up SEAMANSHIP database now..."
   sleep 1
-  podman exec -it study_maria mariadb-dump study > "$HOME"/db-backups/mariadb/standard-dumps/"$(date +%F)"-study.sql
-  rm "$HOME"/containers/testbank/mariadb/volume/*
-  cp "$HOME"/db-backups/mariadb/standard-dumps/"$(date +%F)"-study.sql "$HOME"/containers/testbank/mariadb/volume/
-  echo "STUDY database backup complete."
-  echo "New STUDY SQL file has been placed in container volume."
-  echo "Restarting STUDY MariaDB container now.."
+  podman exec -it seamanship_db mariadb-dump study > "$HOME"/db-backups/mariadb/standard-dumps/"$(date +%F)"-seamanship.sql
+  rm "$HOME"/containers/seamanship/mariadb/volume/*
+  cp "$HOME"/db-backups/mariadb/standard-dumps/"$(date +%F)"-seamanship.sql "$HOME"/containers/seamanship/mariadb/volume/
+  echo "SEAMANSHIP database backup complete."
+  echo "New SEAMANSHIP SQL file has been placed in container volume."
+  echo "Restarting SEAMANSHIP MariaDB container now.."
   sleep 1
-  podman restart study_maria
+  podman restart seamanship_db 
   sleep 1
-  echo "STUDY MariaDB container has been restarted."
+  echo "SEAMANSHIP MariaDB container has been restarted."
   echo "All done!"
 else
   echo "Unable to create backup; SQL container is not online."
