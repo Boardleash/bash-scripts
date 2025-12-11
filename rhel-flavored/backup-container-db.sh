@@ -22,7 +22,7 @@ seamanship=$(podman ps | grep 'seamanship_db')
 if [[ "$hallow" ]]; then
   echo "Backing up HALLOWEEN database now..."
   sleep 1
-  podman exec -it halloween_mysql mysqldump halloween > "$HOME"/db-backups/mysql/standard-dumps/"$(date +%F)"-halloween.sql
+  podman exec -it halloween_mysql mysqldump --set-gtid-purged=OFF halloween > "$HOME"/db-backups/mysql/standard-dumps/"$(date +%F)"-halloween.sql
   podman exec -it halloween_mysql mysqldump --hex-blob halloween > "$HOME"/db-backups/mysql/hex-dumps/"$(date +%F)"-halloween-hex.sql
   rm "$HOME"/containers/halloween/mysql/volumes/*
   cp "$HOME"/db-backups/mysql/standard-dumps/"$(date +%F)"-halloween.sql "$HOME"/containers/halloween/mysql/volumes/
@@ -36,7 +36,7 @@ if [[ "$hallow" ]]; then
 elif [[ "$sardines" ]]; then
   echo "Backing up TINS database now..."
   sleep 1
-  podman exec -it sardine_mysql mysqldump tins > "$HOME"/db-backups/mysql/standard-dumps/"$(date +%F)"-tins.sql
+  podman exec -it sardine_mysql mysqldump --set-gtid-purged=OFF tins > "$HOME"/db-backups/mysql/standard-dumps/"$(date +%F)"-tins.sql
   podman exec -it sardine_mysql mysqldump --hex-blob tins > "$HOME"/db-backups/mysql/hex-dumps/"$(date +%F)"-tins-hex.sql
   rm "$HOME"/containers/sardines/mysql/volumes/*
   cp "$HOME"/db-backups/mysql/standard-dumps/"$(date +%F)"-tins.sql "$HOME"/containers/sardines/mysql/volumes/
