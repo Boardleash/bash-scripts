@@ -10,19 +10,19 @@
 
 # Check if there is a cleanup-stats file already created.  If not, create one, otherwise,
 # append a space to it to start the new cleanup stats
-checkFile="$HOME/sql-cleanup-stats"
-if [ ! -e "$checkFile" ]; then
+check_file="$HOME/sql-cleanup-stats"
+if [ ! -e "$check_file" ]; then
   touch "$HOME"/sql-cleanup-stats
 else
-  echo " " >> "$checkFile"
+  echo " " >> "$check_file"
 fi
 
 # Check the original space, prior to backup file cleanup
-originalSpace=$(du -s "$HOME"/db-backups/ | awk '{print $1}')
+original_space=$(du -s "$HOME"/db-backups/ | awk '{print $1}')
 
 # Check for empty backup files and get rid of them
-deletedFiles=$(find "$HOME"/db-backups/ -type f -empty | wc -l)
-echo "$(date +%c) EMPTY FILES DELETED: $deletedFiles" >> "$checkFile"
+deleted_files=$(find "$HOME"/db-backups/ -type f -empty | wc -l)
+echo "$(date +%c) EMPTY FILES DELETED: $deleted_files" >> "$check_file"
 find "$HOME"/db-backups/ -type f -empty -delete
 
 
@@ -69,12 +69,12 @@ else
 fi
 
 # Check the new amount of space used after file cleanup
-newSpace=$(du -s "$HOME"/db-backups/mysql/ | awk '{print $1}')
+new_space=$(du -s "$HOME"/db-backups/mysql/ | awk '{print $1}')
 
 # Get a number of how much space was saved after doing the cleanup
-savedSpace=$(($originalSpace - $newSpace))
-echo "$(date +%c) SPACE PRIOR TO FILE CLEANUP: $originalSpace bytes" >> "$checkFile"
-echo "$(date +%c) SPACE AFTER FILE CLEANUP: $newSpace bytes">> "$checkFile"
-echo "$(date +%c) SPACE SAVED: $savedSpace bytes ">> "$checkFile"
+saved_space=$(($original_space - $new_space))
+echo "$(date +%c) SPACE PRIOR TO FILE CLEANUP: $original_space bytes" >> "$check_file"
+echo "$(date +%c) SPACE AFTER FILE CLEANUP: $new_space bytes">> "$check_file"
+echo "$(date +%c) SPACE SAVED: $saved_space bytes ">> "$check_file"
 
 # EOF
