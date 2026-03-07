@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 #----------------------------------
-# TITLE: capture-container-db.sh
+# TITLE: backup-container-db.sh
 # AUTHOR: Boardleash (Derek)
 # DATE: Monday, October 13th 2025
 #----------------------------------
@@ -26,7 +26,7 @@ if [[ "$seamanship" ]]; then
   echo "Restarting SEAMANSHIP MariaDB container now..."; sleep 1
   podman restart seamanship_db; sleep 1
   echo "SEAMANSHIP MariaDB container has been restarted.  All done!"
-elif [[ "$everything" ]]; then
+elif [[ "$demersal" ]]; then
   echo "Backing up MariaDB and MySQL databases now..."; sleep 1
   podman exec -it mariadb_database mariadb-dump --databases fitness trails > "$HOME"/db-backups/mariadb/standard-dumps/"$(date +%F)"-everything.sql
   rm "$HOME"/containers/demersal/mariadb/volume/*
