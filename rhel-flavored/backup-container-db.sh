@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 #----------------------------------
-# TITLE: backup-container-db.sh
+# TITLE: capture-container-db.sh
 # AUTHOR: Boardleash (Derek)
 # DATE: Monday, October 13th 2025
 #----------------------------------
@@ -29,11 +29,11 @@ if [[ "$seamanship" ]]; then
 elif [[ "$demersal" ]]; then
   echo "Backing up MariaDB and MySQL databases now..."; sleep 1
   podman exec -it mariadb_database mariadb-dump --databases fitness trails > "$HOME"/db-backups/mariadb/standard-dumps/"$(date +%F)"-everything.sql
-  rm "$HOME"/containers/demersal/mariadb/volume/*
+  rm "$HOME"/containers/demersal/mariadb/volume/*everything*
   cp "$HOME"/db-backups/mariadb/standard-dumps/"$(date +%F)"-everything.sql "$HOME"/containers/demersal/mariadb/volume/
   sleep 1
   podman exec -it mysql_database mysqldump --set-gtid-purged=OFF tins > "$HOME"/db-backups/mysql/standard-dumps/"$(date +%F)"-tins.sql
-  rm "$HOME"/containers/demersal/mysql/volume/*
+  rm "$HOME"/containers/demersal/mysql/volume/*tins*
   cp "$HOME"/db-backups/mysql/standard-dumps/"$(date +%F)"-tins.sql "$HOME"/containers/demersal/mysql/volume/
   sleep 1
   echo "MariaDB and MySQL database backup complete.  New database SQL files have been placed in container volumes."
